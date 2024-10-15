@@ -1,7 +1,9 @@
 package workshop.spring.server;
 
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import workshop.spring.api.StudentApi;
 import workshop.spring.api.model.StudentDTORead;
 import workshop.spring.api.model.StudentDTOWrite;
@@ -29,7 +31,7 @@ public class StudentApiRestImpl implements StudentApi {
     @Override
     @GetMapping("/{id}")
     public StudentDTORead getStudentById(@PathVariable Long id) {
-        throw new UnsupportedOperationException("Operation not implemented yet.");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @Override

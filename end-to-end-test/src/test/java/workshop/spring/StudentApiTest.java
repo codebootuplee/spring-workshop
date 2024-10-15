@@ -55,7 +55,7 @@ public class StudentApiTest {
     }
 
     @Test
-    void throw400WhenNameIsNull() {
+    void throws400WhenCreatingStudentAndNameIsNull() {
         StudentApi api = createClient();
         StudentDTOWrite lee = new StudentDTOWrite(null);
         assertThatThrownBy(() -> api.createStudent(lee))
@@ -65,31 +65,40 @@ public class StudentApiTest {
     }
 
     @Test
-    void testGetStudentByIdThrowsUnsupportedOperationException() {
+    void throws404WhenStudentDoesNotExist() {
+        StudentApi api = createClient();
+        assertThatThrownBy(() -> api.getStudentById(1L))
+                .isInstanceOf(HttpClientErrorException.class)
+                .extracting("statusCode")
+                .isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    void canGetStudentById() {
         StudentApi api = createClient();
         assertThrows(RestClientException.class, () -> api.getStudentById(1L));
     }
 
     @Test
-    void testUpdateStudentThrowsUnsupportedOperationException() {
+    void canUpdateStudent() {
         StudentApi api = createClient();
         assertThrows(RestClientException.class, () -> api.updateStudent(1L, null));
     }
 
     @Test
-    void testDeleteStudentThrowsUnsupportedOperationException() {
+    void canDeleteStudent() {
         StudentApi api = createClient();
         assertThrows(RestClientException.class, () -> api.deleteStudent(1L));
     }
 
     @Test
-    void testAddModuleToStudentThrowsUnsupportedOperationException() {
+    void canAddModuleToStudent() {
         StudentApi api = createClient();
         assertThrows(RestClientException.class, () -> api.addModuleToStudent(1L, 1L));
     }
 
     @Test
-    void testRemoveModuleFromStudentThrowsUnsupportedOperationException() {
+    void canRemoveModuleFromStudent() {
         StudentApi api = createClient();
         assertThrows(RestClientException.class, () -> api.removeModuleFromStudent(1L, 1L));
     }
