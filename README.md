@@ -126,15 +126,17 @@
 3. **Clone the Repository**:
     - Click **Clone**, and IntelliJ will download the repository. When prompted, trust the project.
 
-4. **Import Maven Dependencies**:
-    - IntelliJ should automatically import the Maven dependencies. If not, right-click the `pom.xml` file and select **Maven** > **Reload Project**.
+4. **Import Gradle Dependencies**:
+    - The `spring-workshop` project uses **Gradle** for dependency management.
+    - IntelliJ should automatically detect the `build.gradle` file and start importing Gradle dependencies.
+    - If IntelliJ doesn't automatically import, right-click the `build.gradle` file and select **Import Gradle Project**.
 
 5. **Set JDK 21 for the Project**:
     - Ensure JDK 21 is set for the project by going to **File** > **Project Structure** > **Project** and selecting JDK 21 as the SDK.
 
 6. **Run the Project**:
-    - Right-click the main Spring Boot application class and choose **Run**.
+    - Right-click the main Spring Boot application class and choose **Run**. IntelliJ will build the project using Gradle and launch the Spring Boot application.
 
 ## Conclusion
 
-Now you're set up with Java 21, IntelliJ IDEA, and the `spring-workshop` project. You're ready to start coding and exploring Spring Boot with Java 21!
+Now you're set up with Java 21, IntelliJ IDEA, and the `spring-workshop` project using Gradle. You're ready to start coding and exploring Spring Boot with Java 21!
