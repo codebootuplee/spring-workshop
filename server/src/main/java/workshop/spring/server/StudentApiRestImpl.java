@@ -1,21 +1,29 @@
 package workshop.spring.server;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import workshop.spring.api.StudentApi;
 import workshop.spring.api.model.StudentDTORead;
 import workshop.spring.api.model.StudentDTOWrite;
+import workshop.spring.server.data.StudentRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/students")
 public class StudentApiRestImpl implements StudentApi {
+    private final StudentRepository repository;
+    private final StudentMapper mapper;
+
+    public StudentApiRestImpl(StudentRepository repository, StudentMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 
     @Override
     @GetMapping
     public List<StudentDTORead> getAllStudents() {
-        throw new UnsupportedOperationException("Operation not implemented yet.");
+        return repository.findAll().stream().map(mapper::toDto).toList();
     }
 
     @Override
@@ -26,8 +34,8 @@ public class StudentApiRestImpl implements StudentApi {
 
     @Override
     @PostMapping
-    public StudentDTORead createStudent(@RequestBody StudentDTOWrite student) {
-        throw new UnsupportedOperationException("Operation not implemented yet.");
+    public StudentDTORead createStudent(@Valid @RequestBody StudentDTOWrite student) {
+        return mapper.toDto(repository.save(mapper.toDao(student)));
     }
 
     @Override
