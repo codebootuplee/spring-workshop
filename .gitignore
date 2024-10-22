@@ -22,7 +22,7 @@ temp/
 *.class
 
 # JAR files
-*.jar
+
 
 # WAR files
 *.war
