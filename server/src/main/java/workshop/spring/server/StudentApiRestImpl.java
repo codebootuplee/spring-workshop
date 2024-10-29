@@ -36,6 +36,7 @@ public class StudentApiRestImpl implements StudentApi {
 
     @Override
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public StudentDTORead createStudent(@Valid @RequestBody StudentDTOWrite student) {
         return mapper.toDto(repository.save(mapper.toDao(student)));
     }

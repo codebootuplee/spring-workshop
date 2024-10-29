@@ -10,6 +10,7 @@ import workshop.spring.api.model.StudentDTOWrite;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class StudentApiRestClientImpl implements StudentApi {
 
@@ -29,7 +30,7 @@ public class StudentApiRestClientImpl implements StudentApi {
     public List<StudentDTORead> getAllStudents() {
         String url = buildUrl("");
         ResponseEntity<StudentDTORead[]> response = restTemplate.getForEntity(url, StudentDTORead[].class);
-        return Arrays.asList(response.getBody());
+        return Arrays.asList(Objects.requireNonNull(response.getBody()));
     }
 
     @Override
@@ -63,7 +64,7 @@ public class StudentApiRestClientImpl implements StudentApi {
     @Override
     public StudentDTORead addModuleToStudent(Long studentId, Long moduleId) {
         String url = buildUrl("/" + studentId + "/modules/" + moduleId);
-        HttpEntity<Void> request = new HttpEntity<>(null);  // No body needed
+        HttpEntity<Void> request = new HttpEntity<>(null);
         ResponseEntity<StudentDTORead> response = restTemplate.exchange(url, HttpMethod.PATCH, request, StudentDTORead.class);
         return response.getBody();
     }
