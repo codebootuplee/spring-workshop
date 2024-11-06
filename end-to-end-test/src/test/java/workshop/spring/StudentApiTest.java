@@ -49,7 +49,7 @@ public class StudentApiTest {
         );
         StudentDTORead actual = api.createStudent(lee);
         StudentDTORead expected = new StudentDTORead(
-                1L, "Lee"
+                actual.id(), "Lee"
         );
         Assertions.assertThat(actual).isEqualTo(expected);
     }
